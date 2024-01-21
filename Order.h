@@ -11,7 +11,7 @@ private:
     double TotalCost = 0;
 
 public:
-    ShoppingCart cart;
+   // ShoppingCart cart;
 
     // void SetTotalCost(double cost);
 

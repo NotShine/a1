@@ -13,7 +13,7 @@ double TotalCost = 0;
 
 //public:
 
-ShoppingCart cart;
+//ShoppingCart cart;
 
 /* void Order:: SetTotalCost(double cost) {
      this->TotalCost = cost;

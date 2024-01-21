@@ -67,7 +67,7 @@ void Product::ReadFromFile(ifstream& file)
 
 void Product::DisplayBasicInfo()
 {
-    cout << "ID: " << ProductID << ", Name: " << ProductName << ", Price: " << Price << "  Stock: " << QuantityInStock << endl;
+    cout << "ID: " << ProductID << ", Name: " << ProductName << ", Price: " << Price <<  endl;
 }
 // Default constructor
 Product::Product() : ProductID(0), ProductName(""), Price(0.0), QuantityInStock(0) {}

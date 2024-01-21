@@ -35,10 +35,11 @@ void PrintShoppingCartMenu();
 
 bool IsNameValid(string name);
 
+void CheckQuantity(int quantity, int id);
 
 
-//void EnterValidProductId();
 
+ShoppingCart cart; // instance of Shopping cart class
 
 
 Product products[MAX_PRODUCTS]; // create an array of objects
@@ -51,7 +52,7 @@ int main()
     string name, email;
 
     Customer customerOne;
-    ShoppingCart cart;
+
     cout << "Welcome to Treasure Traders" << endl << endl;
 
     do
@@ -251,16 +252,16 @@ int main()
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Invalid Input. Please chooose again" << endl;
-                cin >> id;
+                cin >> quantity;
             }
             break;
 
-        case 5:
+        case 4:
 
             cout << "Printing products in ascending price" << endl;
             SortByAscendingPrice(products, MAX_PRODUCTS);
 
-            cout << "Enter product id: ";
+            cout << "Enter product id you wish to add to cart: ";
             cin >> id;
 
             while (cin.fail() || id < 1 || id > 20)
@@ -269,10 +270,23 @@ int main()
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Invalid Input. Please chooose again" << endl;
                 cin >> id;
+
+
+            }
+
+            cout << "Please enter the quantity: ";
+            cin >> quantity;
+
+            while (cin.fail() || quantity < 1)
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Invalid Input. Please chooose again" << endl;
+                cin >> quantity;
             }
             break;
 
-        case 6: // display shopping cart
+        case 5: // display shopping cart
 
             PrintShoppingCartMenu();
 
@@ -282,27 +296,35 @@ int main()
             if (choice == 1)
             {
 
-                cout << "Below are all the items in your cart" << endl;
+                cout << "Below are all the items in your cart" << endl << endl;
                 cart.DisplayCartItems(); // this does not work, prolly enters function but doesnt go through loop
             }
 
             else if (choice == 2)  //HAVE TO CHECK THIS
             {
+                cart.DisplayCartItems();
 
-                do
+                cout << "Enter id of product you wish to remove: ";
+                cin >> id;
+
+                cout << "Enter the quantity that you want to remove: ";
+                cin >> quantity;
+
+
+
+                while (cin.fail() || id < 1 || id > 20)
                 {
-                    cout << "Enter the name of product to remove from cart: ";
-                    getline(cin, name);
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Invalid Input. Please chooose again" << endl;
+                    cin >> id;
 
-                    // Validate the input
-                    if (!IsNameValid(name))
-                    {
-                        cout << "Invalid input. Please enter a valid name." << endl;
-                    }
-                } while (!IsNameValid(name));
 
-                cart.RemoveItemFromCartWithProductName(name); // can have an option to remove from either name or id
+                }
+
+                cart.RemoveItemFromCartWithProductID(id);
             }
+
 
             else if (choice == 3)
             {
@@ -315,10 +337,11 @@ int main()
 
                 cout << "Below is your final selection of items in cart" << endl;
 
-                orderOne.cart.DisplayCartItems(); // this doesnt work, i think.
+                // orderOne.cart.DisplayCartItems(); // this doesnt work, i think.
             }
 
-        case 7: // exit program
+            //  case 6: // exit program
+
 
         default:
             cout << "Invalid option. Please choose a valid option from the menu." << endl;
@@ -326,7 +349,8 @@ int main()
 
         // END OF SWITCH STATEMENT
 
-        cart.AddItemToCart(id, quantity);
+
+        CheckQuantity(id, quantity);
 
 
 
@@ -352,13 +376,13 @@ int main()
     return 0;
 }
 
-void DisplayAvailableStock(Product products[])
+void DisplayAvailableStock(Product products[])  //change function name
 {
 
     for (int i = 0; i < MAX_PRODUCTS; i++)
     {
 
-        cout << "Product " << i + 1 << ": " << products[i].GetProductName() << " - Quantity: " << products[i].GetQuantityInStock() << ", Price: " << products[i].GetPrice() << endl;
+        cout << "Product " << i + 1 << ": " << products[i].GetProductName() << ", Price: " << products[i].GetPrice() << endl;
     }
 }
 
@@ -533,4 +557,13 @@ void EnterValidProductId() {
     int id = 0;
     cout << "Enter the ID of the product to add to cart:  1, 20" << endl;
     cin >> id;
+}
+
+void CheckQuantity(int quantity, int id) {
+    if (products[id].GetQuantityInStock() >= quantity) {
+        cart.AddItemToCart(quantity, id);
+    }
+    else {
+        cout << "Quantity not in stock" << endl;
+    }
 }
