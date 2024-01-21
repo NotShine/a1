@@ -13,8 +13,8 @@ int ProductID;
 string ProductName;
 double Price;
 int QuantityInStock;
-int QuantityAddedToCart;
-int ProductIDAddedToCart;
+//int QuantityAddedToCart;
+//int ProductIDAddedToCart;
 
 
 

@@ -118,7 +118,7 @@ void ShoppingCart::DisplayCartItems() {
 	cout << "Items in Cart:" << endl;
 
 	for (int i = 0; i < TotalItemsInCart; i++) {
-		cout << " Product: " << i + 1<<"  " << products[i].GetProductName() << "  " << "Price: " << products[i].GetPrice() << endl;
+		cout << " Product: " << i + 1<<"  " << products[i].GetProductName() << "  " << "Price: " << products[i].GetPrice() <<"  "<<"ID: "<< products[i].GetProductID()<< endl;
 	}
 
 	cout << "Total quantity in cart is: " << TotalItemsInCart << endl;
