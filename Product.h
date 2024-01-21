@@ -6,57 +6,55 @@ using namespace std;
 class Product
 {
 
-    // attributes
+	// attributes
 private:
-    int ProductID;
-    string ProductName;
-    double Price;
-    int QuantityInStock;
-    int QuantityAddedToCart;
-    int ProductIDAddedToCart;
-        
-    // member functions
+	int ProductID;
+	string ProductName;
+	double Price;
+	int QuantityInStock;
+	
+
+	// member functions
 public:
-    // setters
-    void SetProductID(int id);
+	// setters
+	void SetProductID(int id);
 
 
-    void SetProductName(string name);
+	void SetProductName(string name);
 
 
-    void SetPrice(double price);
+	void SetPrice(double price);
 
-    void setQuantityInStock(int quantity);
-
-    void SetQuantityAddedToCart(int quantity);
-
-    void SetProductIDAddedToCart(int id);
-
-    // getters
-
-    int GetProductID();
+	void setQuantityInStock(int quantity);
 
 
-    string GetProductName();
-
-    double GetPrice();
 
 
-    int GetQuantityInStock();
+	// getters
 
-    int GetQuantityAddedToCart();
-
-    int GetProductIDAddedToCart();
+	int GetProductID();
 
 
-    void ReadFromFile(ifstream& file);
+	string GetProductName();
+
+	double GetPrice();
 
 
-    void DisplayBasicInfo();
+	int GetQuantityInStock();
+
+	int GetQuantityAddedToCart();
 
 
-    // Default constructor
-    Product(); //: ProductID(0), ProductName(""), Price(0.0) {}
-    // Constructor
-    Product(int id, string& name, int quantity, double price); //: ProductID(id), ProductName(name), QuantityInStock(quantity), Price(price) {}
+
+
+	void ReadFromFile(ifstream& file);
+
+
+	void DisplayBasicInfo();
+
+
+	// Default constructor
+	Product(); //: ProductID(0), ProductName(""), Price(0.0) {}
+	// Constructor
+	Product(int id, string& name, int quantity, double price); //: ProductID(id), ProductName(name), QuantityInStock(quantity), Price(price) {}
 };

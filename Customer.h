@@ -9,6 +9,7 @@ class Customer
 private:
     string CustomerName;
     int CustomerID = 0;
+    int LastAssignedID = 0;
     string CustomerEmail;
 
 public:
@@ -19,11 +20,12 @@ public:
 
     void SetCustomerID(int id);
 
+    void SetCustomerID();
+
     string GetCustomerName();
 
-
     int GetCustomerID();
-
+  
 
     string GetCustomerEmail();
 

@@ -5,12 +5,10 @@
 # include "Product.h"
 
 
-using namespace std;
-
-
 static const int CAPACITY = 20;
 
 
+using namespace std;
 
 
 
@@ -18,91 +16,111 @@ static const int CAPACITY = 20;
 int ItemCount = 0; // number of items in cart
 
 void ShoppingCart::SetTotalItemsInCart(int totalItemsInCart) {
-    this->TotalItemsInCart = totalItemsInCart;
+	this->TotalItemsInCart = totalItemsInCart;
 }
 
 int ShoppingCart::GetTotalItemsInCart() {
-    return TotalItemsInCart;
-}
-
-
-void ShoppingCart::AddItemToCart(int id, int quantity) {
-    if (TotalItemsInCart < MAX_CART_ITEMS)
-    {
-        products[TotalItemsInCart].SetProductIDAddedToCart(id);
-        products[TotalItemsInCart].SetQuantityAddedToCart(quantity);
-        TotalItemsInCart++;
-        cout << "Product added to cart" << endl;
-        cout << "Number of products in your cart: " << TotalItemsInCart << endl;
-
-        ItemCount += quantity;
-        cout << "Quantity of products added to cart " << ItemCount << endl;
-
-        // Update the quantity in stock of the product
-        products[id].setQuantityInStock(products->GetQuantityInStock() - quantity);
-
-
-    }
-    else {
-        cout << "Shopping cart is full!" << endl;
-    }
+	return TotalItemsInCart;
 }
 
 
 
+void ShoppingCart::AddItemToCart(Product product[], int CAPACITY, int id, int quantity) {
+	if (TotalItemsInCart < MAX_CART_ITEMS) {
+		bool productFound = false;
+
+		for (int i = 0; i < CAPACITY; i++) {
+			if (product[i].GetProductID() == id) {
+				productFound = true;
+
+				products[TotalItemsInCart] = product[i];
+				TotalItemsInCart++;
+
+				cout << "Product added to cart" << endl;
+				cout << "Number of products in your cart: " << TotalItemsInCart << endl;
+
+				ItemCount = +quantity;
+				cout << "Quantity of product with id " << id << "  added to cart: " << ItemCount << endl;
+
+				product[i].setQuantityInStock(product[i].GetQuantityInStock() - quantity);
+
+				break;
+			}
+			else if (productFound) {
+				cout << "Product not found" << endl;
+			}
+		}
+	}
+	else {
+		cout << "Cart is full" << endl;
+	}
+}
 
 
-void ShoppingCart::RemoveItemFromCartWithProductID(int productID)
+
+
+void ShoppingCart::RemoveItemFromCartWithProductID(int id, int quantity)
 {
-    for (int i = 0; i < ItemCount; i++)
-    {
-        if (products[i].GetProductID() == productID)
-        {
-            // TotalCostOfItemsInCart -= CartItems[i].GetPrice();
-            cout << "Removed " << products[i].GetProductName() << " from cart" << endl;
+	bool productFound = false;
+	for (int i = 0; i < ItemCount; i++)
+	{
+		if (products[i].GetProductID() == id)
+		{
+			productFound = true;
 
-            for (int j = i; j < TotalCostOfItemsInCart - 1; j++)
-            {
-                products[j] = products[j + 1];
-            }
+			if (quantity >= products[i].GetQuantityInStock())
+			{
+				//decreasing quantity of product in cart/ removing it
+				TotalItemsInCart -= products[i].GetQuantityInStock(); //total products
 
-            --TotalItemsInCart;
-        }
-    }
+				cout << "Product with " << id << " removed from cart" << endl;
+				cout << "Number of products in cart is: " << TotalItemsInCart << endl;
+			}
 
-    cout << "Product not found" << endl;
+			else {
+				ItemCount -= quantity;
+			}
+			//updating stock
+			products[i].setQuantityInStock(products[i].GetQuantityInStock() + quantity);
+
+
+			// Remove the product from the cart if its quantity becomes 0
+			if (products[i].GetQuantityInStock() == 0) {
+
+				//updating the products array
+				for (int j = i; j < TotalItemsInCart - 1; ++j) {
+					products[j] = products[j + 1];
+				}
+				--TotalItemsInCart;
+			}
+
+			break;
+		}
+	}
+
+	if (productFound) {       // if (false) 
+		cout << "Product with ID " << id << " not found in the cart." << endl;
+	}
 }
 
-void ShoppingCart::RemoveItemFromCartWithProductName(string productName) // wont use this one
-{
-    for (int i = 0; i < ItemCount; i++)
-    {
-        if (products[i].GetProductName() == productName)
-        {
-            //   TotalCostOfItemsInCart -= CartItems[i].GetPrice();
-            cout << "Removed " << products[i].GetProductName() << " from cart" << endl;
 
-            for (int j = i; j < TotalCostOfItemsInCart - 1; j++)
-            {
-                products[j] = products[j + 1];
-            }
 
-            --TotalItemsInCart;
-        }
-    }
-
-    cout << "Product not found" << endl;
-}
 
 
 
 
 // display cart items
 void ShoppingCart::DisplayCartItems() {
-    cout << "Items in Cart:" << endl<<endl;
 
-    for (int i = 0; i < TotalItemsInCart; i++) {
-        cout <<" Product ID: "<< products[i].GetProductIDAddedToCart() << "  " <<" Quantity: "<<products[i].GetQuantityAddedToCart()<< endl;
-    }
+	if (TotalItemsInCart == 0) {
+		cout << "Your shopping cart is empty" << endl;
+	}
+	cout << "Items in Cart:" << endl;
+
+	for (int i = 0; i < TotalItemsInCart; i++) {
+		cout << " Product: " << i + 1<<"  " << products[i].GetProductName() << "  " << "Price: " << products[i].GetPrice() << endl;
+	}
+
+	cout << "Total quantity in cart is: " << TotalItemsInCart << endl;
 }
 

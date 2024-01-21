@@ -39,13 +39,9 @@ void Product::setQuantityInStock(int quantity)
     this->QuantityInStock = quantity;
 }
 
-void Product::SetQuantityAddedToCart(int quantity) {
-    this->QuantityAddedToCart = quantity;
-}
 
-void Product::SetProductIDAddedToCart(int id) {
-    this->ProductIDAddedToCart = id;
-}
+
+
 
 // getters
 
@@ -69,13 +65,9 @@ int Product::GetQuantityInStock()
     return QuantityInStock;
 }
 
-int Product:: GetQuantityAddedToCart() {
-    return QuantityAddedToCart;
-}
 
-int Product::GetProductIDAddedToCart() {
-    return ProductIDAddedToCart;
-}
+
+
 
 void Product::ReadFromFile(ifstream& file)
 {

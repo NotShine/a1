@@ -1,5 +1,6 @@
 #pragma once
 # include "Product.h"
+# include "Order.h"
 
 const int SIZE = 20;
 using namespace std;
@@ -19,13 +20,10 @@ private:
 
 public:
     Product products[SIZE];
-
    
-    void AddItemToCart(int  id, int quantity);
+    void AddItemToCart(Product product[], int CAPACITY, int id, int quantity);
 
-    void RemoveItemFromCartWithProductID(int productID);
-
-    void RemoveItemFromCartWithProductName(string productName);
+    void RemoveItemFromCartWithProductID(int id, int quantity);
 
     void DisplayCartItems();
 
@@ -33,6 +31,6 @@ public:
 
     int GetTotalItemsInCart();
 
-
+    
 
 };

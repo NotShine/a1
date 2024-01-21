@@ -4,21 +4,16 @@
 
 using namespace std;
 
-//class Order : public Customer
-//{
+//class Order 
 
 //private:
 
-double TotalCost = 0;
+
 
 //public:
+	//void FinalCartItems() {
+		
+	//}
 
-//ShoppingCart cart;
 
-/* void Order:: SetTotalCost(double cost) {
-     this->TotalCost = cost;
- }
-
- double Order:: GetTotalCost() {
-     return GetTotalCost();
- }*/
+ 

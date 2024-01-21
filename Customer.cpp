@@ -7,14 +7,7 @@ using namespace std;
 
 
 
-//class Customer
-//{
-//private:
-//    string CustomerName;
-//    int CustomerID;
-//    string CustomerEmail;
 
-//public:
 void Customer::SetCustomerName(string name)
 {
     this->CustomerName = name;
@@ -34,10 +27,14 @@ string Customer::GetCustomerName()
     return CustomerName;
 }
 
-int Customer::GetCustomerID()
-{
+void Customer:: SetCustomerID() {
+    CustomerID = LastAssignedID++;
+}
+
+int Customer:: GetCustomerID() {
     return CustomerID;
 }
+
 
 string Customer::GetCustomerEmail()
 {
