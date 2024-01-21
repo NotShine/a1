@@ -12,7 +12,9 @@ private:
     string ProductName;
     double Price;
     int QuantityInStock;
-
+    int QuantityAddedToCart;
+    int ProductIDAddedToCart;
+        
     // member functions
 public:
     // setters
@@ -26,6 +28,10 @@ public:
 
     void setQuantityInStock(int quantity);
 
+    void SetQuantityAddedToCart(int quantity);
+
+    void SetProductIDAddedToCart(int id);
+
     // getters
 
     int GetProductID();
@@ -37,6 +43,10 @@ public:
 
 
     int GetQuantityInStock();
+
+    int GetQuantityAddedToCart();
+
+    int GetProductIDAddedToCart();
 
 
     void ReadFromFile(ifstream& file);

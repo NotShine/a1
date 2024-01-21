@@ -5,10 +5,12 @@
 # include "Product.h"
 
 
+using namespace std;
+
+
 static const int CAPACITY = 20;
 
 
-using namespace std;
 
 
 
@@ -25,9 +27,10 @@ int ShoppingCart::GetTotalItemsInCart() {
 
 
 void ShoppingCart::AddItemToCart(int id, int quantity) {
-    if (TotalItemsInCart < MAX_CART_ITEMS) {
-        products[TotalItemsInCart].SetProductID(id);
-        products[TotalItemsInCart].setQuantityInStock(quantity);
+    if (TotalItemsInCart < MAX_CART_ITEMS)
+    {
+        products[TotalItemsInCart].SetProductIDAddedToCart(id);
+        products[TotalItemsInCart].SetQuantityAddedToCart(quantity);
         TotalItemsInCart++;
         cout << "Product added to cart" << endl;
         cout << "Number of products in your cart: " << TotalItemsInCart << endl;
@@ -96,10 +99,10 @@ void ShoppingCart::RemoveItemFromCartWithProductName(string productName) // wont
 
 // display cart items
 void ShoppingCart::DisplayCartItems() {
-    cout << "Items in Cart:" << endl;
+    cout << "Items in Cart:" << endl<<endl;
 
     for (int i = 0; i < TotalItemsInCart; i++) {
-        cout <<" Product: "<< products[i].GetProductName() << "  " << "Price: " << products[i].GetPrice() << endl;
+        cout <<" Product ID: "<< products[i].GetProductIDAddedToCart() << "  " <<" Quantity: "<<products[i].GetQuantityAddedToCart()<< endl;
     }
 }
 

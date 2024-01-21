@@ -20,11 +20,7 @@ private:
 public:
     Product products[SIZE];
 
-    //Product CartItems[MAX_CART_ITEMS];
-    // int TotalItemsInCart = 0;
-
-   //  ShoppingCart() : TotalItemsInCart(0), TotalCostOfItemsInCart(0) {}
-
+   
     void AddItemToCart(int  id, int quantity);
 
     void RemoveItemFromCartWithProductID(int productID);
