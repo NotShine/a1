@@ -1,6 +1,6 @@
 #pragma once
 #pragma once
-# include <string>
+#include <string>
 
 using namespace std;
 
@@ -15,7 +15,6 @@ private:
 public:
     void SetCustomerName(string name);
 
-
     void SetCustomerEmail(string email);
 
     void SetCustomerID(int id);
@@ -25,8 +24,6 @@ public:
     string GetCustomerName();
 
     int GetCustomerID();
-  
 
     string GetCustomerEmail();
-
 };

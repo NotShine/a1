@@ -1,12 +1,7 @@
-# include <string>
-# include "Customer.h"
-
-
+#include <string>
+#include "Customer.h"
 
 using namespace std;
-
-
-
 
 void Customer::SetCustomerName(string name)
 {
@@ -27,14 +22,15 @@ string Customer::GetCustomerName()
     return CustomerName;
 }
 
-void Customer:: SetCustomerID() {
+void Customer::SetCustomerID()
+{
     CustomerID = LastAssignedID++;
 }
 
-int Customer:: GetCustomerID() {
+int Customer::GetCustomerID()
+{
     return CustomerID;
 }
-
 
 string Customer::GetCustomerEmail()
 {

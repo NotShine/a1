@@ -8,14 +8,12 @@
 #include <ctime>
 #include <algorithm>
 
-# include "Product.h"
-# include  "Order.h"
-# include "Customer.h"
-# include "Shoppingcart.h"
-
+#include "Product.h"
+#include "Order.h"
+#include "Customer.h"
+#include "Shoppingcart.h"
 
 using namespace std;
-
 
 static const int MAX_PRODUCTS = 20;
 
@@ -25,7 +23,7 @@ void SearchUsingRange(int range, Product product[]); // searches for products in
 
 void SearchUsingProductID(int id, Product products[]); // searches for products using id
 
-void SortByAscendingPrice(Product* product, int size); // sorts products in ascending order
+void SortByAscendingPrice(Product *product, int size); // sorts products in ascending order
 
 void PrintPriceRangeMenu(); // print the menu for selected price range, users can select options
 
@@ -37,10 +35,7 @@ bool IsNameValid(string name); // checks if name of user is valid (input validat
 
 void CheckQuantity(int quantity, int id); // checks if input quantity is <= stock quantity / AddToCart function is then called
 
-
-
 ShoppingCart cart; // instance of Shopping cart class, access functions
-
 
 Product product[MAX_PRODUCTS]; // create an array of Product objects, store data
 
@@ -55,11 +50,12 @@ int main()
 
 	Customer customerOne;
 
-	cout << "Welcome to Treasure Traders" << endl << endl;
+	cout << "Welcome to Treasure Traders" << endl
+		 << endl;
 
 	do // code runs in a do while loop allowing for continuation
 	{
-		//customer name
+		// customer name
 		cout << "Enter your name: ";
 		getline(cin, name);
 
@@ -70,19 +66,18 @@ int main()
 		}
 	} while (!IsNameValid(name));
 
-	     // customer email
+	// customer email
 	cout << "Please enter your email: ";
 	cin >> email;
 
-	    //customer id
-	cout << "Please enter your id: "; // 
+	// customer id
+	cout << "Please enter your id: "; //
 	cin >> CustomerID;
-	    
-	   //set customer information
+
+	// set customer information
 	customerOne.SetCustomerName(name);
 	customerOne.SetCustomerEmail(email);
 	customerOne.SetCustomerID(CustomerID);
-
 
 	cout << endl;
 
@@ -108,8 +103,7 @@ int main()
 	}
 
 	file.close();
-	int option = 0, continuechoice = 0, choice = 0; 
-	
+	int option = 0, continuechoice = 0, choice = 0;
 
 	cout << "Please enter 1 to continue or 0 to exit: ";
 	cin >> continuechoice;
@@ -125,7 +119,8 @@ int main()
 	while (continuechoice == 1)
 	{
 
-		cout << endl << endl;
+		cout << endl
+			 << endl;
 
 		// Print general menu
 		PrintMenuOptions();
@@ -141,35 +136,33 @@ int main()
 			cin >> option;
 		}
 
-		//used in the switch case statement
+		// used in the switch case statement
 		string name;
-		int quantity = 0; 
+		int quantity = 0;
 		int id = 0;
 		int range = 0;
 
 		switch (option)
 		{
 		case 1: // prints all items
-			
+
 			DisplayAvailableStock(product);
 			cout << endl;
 
 			cout << "Enter product id to add to cart: ";
 			cin >> id;
-			while (cin.fail() || id < 1 || id > 20 )
+			while (cin.fail() || id < 1 || id > 20)
 			{
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Invalid Input. Please chooose again" << endl;
 				cin >> id;
-
-
 			}
 
 			cout << "Please enter the quantity: ";
 			cin >> quantity;
 
-			while (cin.fail() || quantity < 1) 
+			while (cin.fail() || quantity < 1)
 			{
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -182,7 +175,7 @@ int main()
 			break;
 
 		case 2: // searching by id
-			
+
 			cout << "Enter id: ";
 			cin >> id;
 			while (cin.fail() || id < 1 || id > 20 || id == 0)
@@ -191,8 +184,6 @@ int main()
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Invalid Input. Please chooose again" << endl;
 				cin >> id;
-
-
 			}
 
 			SearchUsingProductID(id, product);
@@ -217,18 +208,13 @@ int main()
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Invalid Input. Please chooose again" << endl;
 				cin >> quantity;
-
-				
 			}
 
 			CheckQuantity(id, quantity);
 
 			break;
 
-
-
-
-		case 3: //searching by price range
+		case 3: // searching by price range
 
 			PrintPriceRangeMenu();
 
@@ -244,7 +230,7 @@ int main()
 			}
 
 			cout << endl;
-			
+
 			SearchUsingRange(range, product);
 
 			cout << "Enter id of product :";
@@ -285,8 +271,6 @@ int main()
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cout << "Invalid Input. Please chooose again" << endl;
 				cin >> id;
-
-
 			}
 
 			cout << "Please enter the quantity: ";
@@ -303,81 +287,83 @@ int main()
 			CheckQuantity(id, quantity);
 			break;
 
-		case 5: do {
-			//system("CLS"); 
-			PrintShoppingCartMenu();
+		case 5:
+			do
+			{
+				// system("CLS");
+				PrintShoppingCartMenu();
 
-			cout << "Please select an item from the menu OR enter -1 to exit: ";
-			cin >> choice;
+				cout << "Please select an item from the menu OR enter -1 to exit: ";
+				cin >> choice;
 
-			switch (choice) {
-			case 1:
-				//system("CLS");
-				cout << "Below are all the items in your cart" << endl << endl;
-				cart.DisplayCartItems();
-				
-				break;
+				switch (choice)
+				{
+				case 1:
+					// system("CLS");
+					cout << "Below are all the items in your cart" << endl
+						 << endl;
+					cart.DisplayCartItems();
 
-			case 2:
-				//system("CLS");
-				cart.DisplayCartItems();
+					break;
 
-				int id, quantity;
+				case 2:
+					// system("CLS");
+					cart.DisplayCartItems();
 
-				cout << "Enter id of product you wish to remove: ";
-				cin >> id;
-				while (cin.fail() || id < 1 || id > 20) {
-					cin.clear();
-					cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					cout << "Invalid Input. Please choose again" << endl;
+					int id, quantity;
+
+					cout << "Enter id of product you wish to remove: ";
 					cin >> id;
-				}
+					while (cin.fail() || id < 1 || id > 20)
+					{
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						cout << "Invalid Input. Please choose again" << endl;
+						cin >> id;
+					}
 
-				cout << "Enter the quantity that you want to remove: ";
-				cin >> quantity;
-
-				while (cin.fail() || quantity < 1) {
-					cin.clear();
-					cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					cout << "Invalid Input. Please choose again" << endl;
+					cout << "Enter the quantity that you want to remove: ";
 					cin >> quantity;
+
+					while (cin.fail() || quantity < 1)
+					{
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						cout << "Invalid Input. Please choose again" << endl;
+						cin >> quantity;
+					}
+
+					cart.RemoveItemFromCartWithProductID(id, quantity);
+
+					break;
+
+				case 3: // NEED TO ADD STUFF
+					// system("CLS");
+
+					break;
+
+				case 0:
+					cout << "Exiting the program. Goodbye!" << endl;
+					break;
+
+				default:
+					cout << "Invalid choice. Please choose again." << endl;
 				}
 
-				cart.RemoveItemFromCartWithProductID(id, quantity);
-				
-				break;
+				//// Pause before clearing the screen again
+				// cout << "Press Enter to continue...";
+				// cin.ignore();
+				// cin.get();
 
-			case 3: // NEED TO ADD STUFF
-				//system("CLS");
-				
-				break;
+			} while (choice != -1);
 
-			case 0:
-				cout << "Exiting the program. Goodbye!" << endl;
-				break;
-
-			default:
-				cout << "Invalid choice. Please choose again." << endl;
-			}
-
-			//// Pause before clearing the screen again
-			//cout << "Press Enter to continue...";
-			//cin.ignore();
-			//cin.get();
-
-		} while (choice != -1);
-			 
-
-		case 6: //exits program
+		case 6: // exits program
 			cout << "Thank you for shopping with us." << endl;
 			exit(0);
-
 
 		default:
 			cout << "Invalid option. Please choose a valid option from the menu." << endl;
 		}
-
-
 
 		cout << "Enter 1 to continue, 0 to exit "; // allow for continuation of program
 		cin >> continuechoice;
@@ -403,7 +389,7 @@ int main()
 
 // END OF MAIN FUNCTION
 
-void DisplayAvailableStock(Product products[])  //change function name
+void DisplayAvailableStock(Product products[]) // change function name
 {
 
 	for (int i = 0; i < MAX_PRODUCTS; i++)
@@ -487,7 +473,7 @@ void SearchUsingRange(int range, Product products[])
 
 void SearchUsingProductName(string name, Product products[])
 {
-	for (char& c : name)
+	for (char &c : name)
 	{
 		c = tolower(c);
 	}
@@ -514,12 +500,12 @@ void SearchUsingProductID(int id, Product products[])
 	}
 }
 
-bool compareByPrice(Product& a, Product& b)
+bool compareByPrice(Product &a, Product &b)
 {
 	return a.GetPrice() < b.GetPrice();
 }
 
-void SortByAscendingPrice(Product* product, int size)
+void SortByAscendingPrice(Product *product, int size)
 {
 
 	sort(product, product + size, compareByPrice);
@@ -562,8 +548,9 @@ void PrintPriceRangeMenu()
 
 void PrintShoppingCartMenu()
 {
-    cout << "\tMenu" << endl;
-	cout << "You can select the numbers associatied with the items" << endl<<endl;
+	cout << "\tMenu" << endl;
+	cout << "You can select the numbers associatied with the items" << endl
+		 << endl;
 	cout << " 1. View all items from cart" << endl;
 	cout << "-------------------------------" << endl;
 	cout << " 2. Remove an item from the cart" << endl;
@@ -577,19 +564,17 @@ void PrintShoppingCartMenu()
 bool IsNameValid(string name)
 {
 	return !name.empty() && all_of(name.begin(), name.end(), [](char ch)
-		{ return isalpha(ch); });
+								   { return isalpha(ch); });
 }
 
-
-
-
-void CheckQuantity(int quantity, int id) {
-	if (product[id].GetQuantityInStock() >= quantity) {
-		cart.AddItemToCart(product, MAX_PRODUCTS,quantity, id);
+void CheckQuantity(int quantity, int id)
+{
+	if (product[id].GetQuantityInStock() >= quantity)
+	{
+		cart.AddItemToCart(product, MAX_PRODUCTS, quantity, id);
 	}
-	else {
+	else
+	{
 		cout << "Quantity not in stock" << endl;
 	}
 }
-
-

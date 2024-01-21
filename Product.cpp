@@ -1,22 +1,18 @@
-# include <string>
-# include <iostream>
-# include <iomanip>
+#include <string>
+#include <iostream>
+#include <iomanip>
 
-# include "Product.h"
+#include "Product.h"
 
 using namespace std;
 
-
-
-//private attributes
+// private attributes
 int ProductID;
 string ProductName;
 double Price;
 int QuantityInStock;
-//int QuantityAddedToCart;
-//int ProductIDAddedToCart;
-
-
+// int QuantityAddedToCart;
+// int ProductIDAddedToCart;
 
 // setters
 void Product::SetProductID(int id)
@@ -39,10 +35,6 @@ void Product::setQuantityInStock(int quantity)
     this->QuantityInStock = quantity;
 }
 
-
-
-
-
 // getters
 
 int Product::GetProductID()
@@ -55,7 +47,7 @@ string Product::GetProductName()
     return ProductName;
 }
 
-double  Product::GetPrice()
+double Product::GetPrice()
 {
     return Price;
 }
@@ -65,20 +57,16 @@ int Product::GetQuantityInStock()
     return QuantityInStock;
 }
 
-
-
-
-
-void Product::ReadFromFile(ifstream& file)
+void Product::ReadFromFile(ifstream &file)
 {
     file >> ProductID >> ProductName >> Price >> QuantityInStock;
 }
 
 void Product::DisplayBasicInfo()
 {
-    cout <<setw(2)<< "ID: " << setw(2) << ProductID << ", Name: "<<setw(2) << ProductName << setw(2) << ", Price: " << Price <<  endl;
+    cout << setw(2) << "ID: " << setw(2) << ProductID << ", Name: " << setw(2) << ProductName << setw(2) << ", Price: " << Price << endl;
 }
 // Default constructor
 Product::Product() : ProductID(0), ProductName(""), Price(0.0), QuantityInStock(0) {}
 // Constructor
-Product::Product(int id, string& name, int quantity, double price) : ProductID(id), ProductName(name), QuantityInStock(quantity), Price(price) {}
+Product::Product(int id, string &name, int quantity, double price) : ProductID(id), ProductName(name), QuantityInStock(quantity), Price(price) {}

@@ -1,19 +1,14 @@
-# include "Order.h"
-# include "Customer.h"
-# include "Shoppingcart.h"
+#include "Order.h"
+#include "Customer.h"
+#include "Shoppingcart.h"
 
 using namespace std;
 
-//class Order 
+// class Order
 
-//private:
+// private:
 
+// public:
+// void FinalCartItems() {
 
-
-//public:
-	//void FinalCartItems() {
-		
-	//}
-
-
- 
+//}
