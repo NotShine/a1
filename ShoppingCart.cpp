@@ -20,89 +20,93 @@ int ShoppingCart::GetTotalItemsInCart()
 	return TotalItemsInCart;
 }
 
-void ShoppingCart::AddItemToCart(Product product[], int CAPACITY, int id, int quantity)
-{
-	if (TotalItemsInCart < MAX_CART_ITEMS)
-	{
+void ShoppingCart::AddItemToCart(Product product[], int CAPACITY, int id, int quantity) {
+	if (TotalItemsInCart < MAX_CART_ITEMS) {
 		bool productFound = false;
 
-		for (int i = 0; i < CAPACITY; i++)
-		{
-			if (product[i].GetProductID() == id)
-			{
+		for (int i = 0; i < CAPACITY; i++) {
+			if (product[i].GetProductID() == id) {
 				productFound = true;
 
-				products[TotalItemsInCart] = product[i];
-				TotalItemsInCart++;
+				if (product[i].GetQuantityInStock() >= quantity) {
+					products[TotalItemsInCart] = product[i];
+					TotalItemsInCart++;
 
-				cout << "Product added to cart" << endl;
-				cout << "Number of products in your cart: " << TotalItemsInCart << endl;
+					cout << "Product added to cart" << endl;
+					cout << "Number of products in your cart: " << TotalItemsInCart << endl;
 
-				ItemCount = +quantity;
-				cout << "Quantity of product with id " << id << "  added to cart: " << ItemCount << endl;
+					ItemCount += quantity;
+					cout << "Quantity of product with id " << id << "  added to cart: " << ItemCount << endl;
 
-				product[i].setQuantityInStock(product[i].GetQuantityInStock() - quantity);
+					product[i].setQuantityInStock(product[i].GetQuantityInStock() - quantity);
 
-				break;
-			}
-			else if (productFound)
-			{
-				cout << "Product not found" << endl;
+					break;
+				}
+				else {
+					cout << "Not enough quantity in stock" << endl;
+					break;  // Exit the loop if quantity is not sufficient
+				}
 			}
 		}
+
+		if (!productFound) {
+			cout << "Product not found" << endl;
+		}
 	}
-	else
-	{
+	else {
 		cout << "Cart is full" << endl;
 	}
 }
 
-void ShoppingCart::RemoveItemFromCartWithProductID(int id, int quantity)
+
+void ShoppingCart::RemoveItemFromCartWithProductID(int id, int quantityToremove)
 {
 	bool productFound = false;
-	for (int i = 0; i < ItemCount; i++)
+
+	for (int i = 0; i < TotalItemsInCart; ++i)
 	{
 		if (products[i].GetProductID() == id)
 		{
 			productFound = true;
 
-			if (quantity >= products[i].GetQuantityInStock())
+			if (quantityToremove <= products[i].GetQuantityInStock())
 			{
-				// decreasing quantity of product in cart/ removing it
-				TotalItemsInCart -= products[i].GetQuantityInStock(); // total products
+				// Decreasing quantity of product in cart/removing it
+				TotalItemsInCart -= quantityToremove;  // Subtract only the quantity being removed
 
-				cout << "Product with " << id << " removed from cart" << endl;
+				cout << "Product with ID " << id << " removed from cart" << endl;
 				cout << "Number of products in cart is: " << TotalItemsInCart << endl;
-			}
 
+				// Updating stock
+				products[i].setQuantityInStock(products[i].GetQuantityInStock() - quantityToremove); // this does not work as expected
+
+				// Remove the product from the cart if its quantity becomes 0
+				if (products[i].GetQuantityInStock() == 0)
+				{
+					// Updating the products array
+					for (int j = i; j < TotalItemsInCart - 1; ++j)
+					{
+						products[j] = products[j + 1];
+					}
+					--TotalItemsInCart;
+				}
+
+				break;
+			}
 			else
 			{
-				ItemCount -= quantity;
+				cout << "Quantity to remove exceeds the quantity in cart for Product with ID " << id << endl;
+				break;
 			}
-			// updating stock
-			products[i].setQuantityInStock(products[i].GetQuantityInStock() + quantity);
-
-			// Remove the product from the cart if its quantity becomes 0
-			if (products[i].GetQuantityInStock() == 0)
-			{
-
-				// updating the products array
-				for (int j = i; j < TotalItemsInCart - 1; ++j)
-				{
-					products[j] = products[j + 1];
-				}
-				--TotalItemsInCart;
-			}
-
-			break;
 		}
 	}
 
-	if (productFound)
-	{ // if (false)
+	if (!productFound)
+	{
 		cout << "Product with ID " << id << " not found in the cart." << endl;
 	}
 }
+
 
 // display cart items
 void ShoppingCart::DisplayCartItems()
@@ -116,10 +120,12 @@ void ShoppingCart::DisplayCartItems()
 
 	for (int i = 0; i < TotalItemsInCart; i++)
 	{
-		cout << " Product: " << i + 1 << "  " << products[i].GetProductName() << "  "
-			 << "Price: " << products[i].GetPrice() << "  "
-			 << "ID: " << products[i].GetProductID() << endl;
+		cout << " Product N0: " << i + 1 << "  "
+			<< "Name: " << products[i].GetProductName() << "  "
+			<< "Price: " << products[i].GetPrice() << "  "
+			<< "ID: " << products[i].GetProductID() << "  "
+			<< "Number you added to cart: " << ItemCount << endl;
 	}
 
-	cout << "Total quantity in cart is: " << TotalItemsInCart << endl;
+	
 }

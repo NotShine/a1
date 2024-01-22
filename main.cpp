@@ -33,8 +33,6 @@ void PrintShoppingCartMenu(); // printts the shopping cart menu (view, remove pr
 
 bool IsNameValid(string name); // checks if name of user is valid (input validation)
 
-void CheckQuantity(int quantity, int id); // checks if input quantity is <= stock quantity / AddToCart function is then called
-
 ShoppingCart cart; // instance of Shopping cart class, access functions
 
 Product product[MAX_PRODUCTS]; // create an array of Product objects, store data
@@ -170,7 +168,7 @@ int main()
 				cin >> id;
 			}
 
-			CheckQuantity(id, quantity);
+			cart.AddItemToCart(product, MAX_PRODUCTS, id, quantity);
 
 			break;
 
@@ -210,7 +208,7 @@ int main()
 				cin >> quantity;
 			}
 
-			CheckQuantity(id, quantity);
+			cart.AddItemToCart(product, MAX_PRODUCTS, id, quantity);
 
 			break;
 
@@ -254,7 +252,7 @@ int main()
 				cin >> quantity;
 			}
 
-			CheckQuantity(id, quantity);
+			cart.AddItemToCart(product, MAX_PRODUCTS, id, quantity);
 			break;
 
 		case 4: // print products in ascending order
@@ -284,7 +282,7 @@ int main()
 				cin >> quantity;
 			}
 
-			CheckQuantity(id, quantity);
+			cart.AddItemToCart(product, MAX_PRODUCTS, id, quantity);
 			break;
 
 		case 5:
@@ -310,7 +308,7 @@ int main()
 					// system("CLS");
 					cart.DisplayCartItems();
 
-					int id, quantity;
+					int id, quantityToremove;
 
 					cout << "Enter id of product you wish to remove: ";
 					cin >> id;
@@ -323,17 +321,17 @@ int main()
 					}
 
 					cout << "Enter the quantity that you want to remove: ";
-					cin >> quantity;
+					cin >> quantityToremove;
 
-					while (cin.fail() || quantity < 1)
+					while (cin.fail() || quantityToremove < 1)
 					{
 						cin.clear();
 						cin.ignore(numeric_limits<streamsize>::max(), '\n');
 						cout << "Invalid Input. Please choose again" << endl;
-						cin >> quantity;
+						cin >> quantityToremove;
 					}
 
-					cart.RemoveItemFromCartWithProductID(id, quantity);
+					cart.RemoveItemFromCartWithProductID(id, quantityToremove);
 
 					break;
 
@@ -350,10 +348,7 @@ int main()
 					cout << "Invalid choice. Please choose again." << endl;
 				}
 
-				//// Pause before clearing the screen again
-				// cout << "Press Enter to continue...";
-				// cin.ignore();
-				// cin.get();
+				
 
 			} while (choice != -1);
 
@@ -564,17 +559,6 @@ void PrintShoppingCartMenu()
 bool IsNameValid(string name)
 {
 	return !name.empty() && all_of(name.begin(), name.end(), [](char ch)
-								   { return isalpha(ch); });
+		{ return isalpha(ch); });
 }
 
-void CheckQuantity(int quantity, int id)
-{
-	if (product[id].GetQuantityInStock() >= quantity)
-	{
-		cart.AddItemToCart(product, MAX_PRODUCTS, quantity, id);
-	}
-	else
-	{
-		cout << "Quantity not in stock" << endl;
-	}
-}

@@ -1,19 +1,30 @@
 #pragma once
-#pragma once
-#include "Order.h"
+
 #include "Customer.h"
-#include "ShoppingCart.h"
+#include "Product.h"
 
-class Order : public Customer
-{
-
+class Order {
 private:
-    double TotalCost = 0;
+    int orderID;
+    Customer customer;
+    Product products[10];
+    int ProductCount;
+    double TotalAmount;
 
 public:
-    // ShoppingCart cart;
+   // Order();
+   // Order(int id, Customer cust, Product prods[], int count, double amount);
 
-    // void SetTotalCost(double cost);
+    void SetOrderID(int id);
+    void SetCustomer(Customer cust);
+    void SetProducts(Product prods[], int count);
+    void SetTotalAmount(double amount);
 
-    // double GetTotalCost();
+    int GetOrderID();
+    Customer GetCustomer();
+    Product* GetProducts();
+    int GetProductCount();
+    double GetTotalAmount();
+
+    void DisplayBasicInfo();
 };

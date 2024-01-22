@@ -34,7 +34,7 @@ public:
 
 	int GetQuantityInStock();
 
-	int GetQuantityAddedToCart();
+	//int GetQuantityAddedToCart();
 
 	void ReadFromFile(ifstream &file);
 
