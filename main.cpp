@@ -49,11 +49,13 @@ int main()
 	Customer customerOne;
 
 	cout << "Welcome to Treasure Traders" << endl
-		 << endl;
+		<< endl;
+
+	
 
 	do // code runs in a do while loop allowing for continuation
 	{
-		// customer name
+
 		cout << "Enter your name: ";
 		getline(cin, name);
 
@@ -68,17 +70,18 @@ int main()
 	cout << "Please enter your email: ";
 	cin >> email;
 
-	// customer id
-	cout << "Please enter your id: "; //
-	cin >> CustomerID;
 
 	// set customer information
 	customerOne.SetCustomerName(name);
 	customerOne.SetCustomerEmail(email);
-	customerOne.SetCustomerID(CustomerID);
+	//customer id
+	customerOne.SetCustomerID(); // generate id
 
+	
 	cout << endl;
 
+		// customer name
+		
 	string line; // used in copying products file contents
 	ifstream file;
 	file.open("products.txt");
@@ -288,7 +291,9 @@ int main()
 		case 5:
 			do
 			{
-				// system("CLS");
+				
+				cout << endl << endl;
+
 				PrintShoppingCartMenu();
 
 				cout << "Please select an item from the menu OR enter -1 to exit: ";
@@ -297,7 +302,7 @@ int main()
 				switch (choice)
 				{
 				case 1:
-					// system("CLS");
+					
 					cout << "Below are all the items in your cart" << endl
 						 << endl;
 					cart.DisplayCartItems();
@@ -305,7 +310,7 @@ int main()
 					break;
 
 				case 2:
-					// system("CLS");
+					
 					cart.DisplayCartItems();
 
 					int id, quantityToremove;
@@ -335,8 +340,18 @@ int main()
 
 					break;
 
-				case 3: // NEED TO ADD STUFF
-					// system("CLS");
+				case 3: //proceed to checkout
+
+					orderOne.SetOrderID(); //create id for order once order is confirmed
+
+					cout << "Order created for: " << orderOne.GetCustomerName() << endl;
+					cout << " Order ID: " << orderOne.GetOrderID();
+					cout << " Customer ID: " << orderOne.GetCustomerID() << endl;
+					cout << " Customer Email: " << orderOne.GetCustomerEmail() << endl<<endl;
+
+					//print cart items
+					cart.DisplayCartItems();
+					
 
 					break;
 
@@ -349,8 +364,9 @@ int main()
 				}
 
 				
-
+				system("CLS");
 			} while (choice != -1);
+			
 
 		case 6: // exits program
 			cout << "Thank you for shopping with us." << endl;
@@ -394,7 +410,7 @@ void DisplayAvailableStock(Product products[]) // change function name
 	}
 }
 
-void DisplayOutOfStockProducts(Product products[])
+void DisplayOutOfStockProducts(Product products[]) // this function has not been used yet
 {
 	for (int i = 0; i < MAX_PRODUCTS; i++)
 	{

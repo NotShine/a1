@@ -3,22 +3,25 @@
 #include "Customer.h"
 #include "Product.h"
 
-class Order {
+const int MAX = 20; // maximum products is 20
+
+class Order :public Customer {
 private:
     int orderID;
     Customer customer;
-    Product products[10];
-    int ProductCount;
-    double TotalAmount;
+    Product products[MAX];
+    int ProductCount = 0;
+    double TotalAmountToPay = 0;
+    int lastAssignedID = 1;
 
 public:
    // Order();
    // Order(int id, Customer cust, Product prods[], int count, double amount);
 
-    void SetOrderID(int id);
-    void SetCustomer(Customer cust);
-    void SetProducts(Product prods[], int count);
-    void SetTotalAmount(double amount);
+    void SetOrderID();
+    void SetCustomer(Customer customer);
+    void SetProducts(Product product[], int count);
+    void SetTotalAmountToPay(double amount);
 
     int GetOrderID();
     Customer GetCustomer();
@@ -27,4 +30,4 @@ public:
     double GetTotalAmount();
 
     void DisplayBasicInfo();
-};
+ };

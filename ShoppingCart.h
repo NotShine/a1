@@ -10,12 +10,7 @@ class ShoppingCart
 
 private:
     static const int MAX_CART_ITEMS = 15;
-    int TotalItemsInCart = 0;
-
-
-    // int ItemCount = 0;
-    double TotalCostOfItemsInCart = 0;
-
+    
     int Quantity = 0;
 
 public:
@@ -27,10 +22,11 @@ public:
 
     void DisplayCartItems();
 
-    void SetTotalItemsInCart(int ItemCount);
+    double AmountOwedForAllSelectedProduct = 0;
 
-    int GetTotalItemsInCart();
+    int TotalItemsInCart = 0;
 
+   
     
 
 };

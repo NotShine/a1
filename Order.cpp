@@ -7,26 +7,23 @@
 using namespace std;
 
 
-	
-
-	void Order::SetOrderID(int id) {
-		this->orderID = id;
-
+void Order::SetOrderID() {
+	orderID = lastAssignedID++;
 	}
 
-	void Order::SetCustomer(Customer cust) {
-		customer = cust;
+	void Order::SetCustomer(Customer customer) {
+		customer = customer;
 	}
 
-	void Order::SetProducts(Product prods[], int count) {
+	void Order::SetProducts(Product product[], int count) {
 		ProductCount = count;
 		for (int i = 0; i < ProductCount; i++) {
-			products[i] = prods[i];
+			products[i] = product[i];
 		}
 	}
 
-	void Order::SetTotalAmount(double amount) {
-		TotalAmount = amount;
+	void Order::SetTotalAmountToPay(double amount) {
+		TotalAmountToPay = amount;
 	}
 
 	int Order::GetOrderID() {
@@ -46,7 +43,7 @@ using namespace std;
 	}
 
 	double Order::GetTotalAmount() {
-		return TotalAmount;
+		return TotalAmountToPay;
 	}
 
 	void Order::DisplayBasicInfo() {
@@ -54,9 +51,10 @@ using namespace std;
 		cout << "Customer ID: " << customer.GetCustomerID() << endl;
 		cout << "Customer Name: " << customer.GetCustomerName() << endl;
 		cout << "Customer Email: " << customer.GetCustomerEmail() << endl;
-		cout << "Total Amount: " << TotalAmount << endl;
+		cout << "Total Amount: " << TotalAmountToPay << endl;
 		cout << "Products: " << endl;
 		for (int i = 0; i < ProductCount; i++) {
 			products[i].DisplayBasicInfo();
 		}
 	}
+

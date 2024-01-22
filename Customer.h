@@ -9,15 +9,13 @@ class Customer
 private:
     string CustomerName;
     int CustomerID = 0;
-    int LastAssignedID = 0;
+    int LastAssignedID = 1;
     string CustomerEmail;
 
 public:
     void SetCustomerName(string name);
 
     void SetCustomerEmail(string email);
-
-    void SetCustomerID(int id);
 
     void SetCustomerID();
 

@@ -10,15 +10,7 @@ using namespace std;
 
 int ItemCount = 0; // number of items in cart
 
-void ShoppingCart::SetTotalItemsInCart(int totalItemsInCart)
-{
-	this->TotalItemsInCart = totalItemsInCart;
-}
 
-int ShoppingCart::GetTotalItemsInCart()
-{
-	return TotalItemsInCart;
-}
 
 void ShoppingCart::AddItemToCart(Product product[], int CAPACITY, int id, int quantity) {
 	if (TotalItemsInCart < MAX_CART_ITEMS) {
@@ -40,6 +32,9 @@ void ShoppingCart::AddItemToCart(Product product[], int CAPACITY, int id, int qu
 
 					product[i].setQuantityInStock(product[i].GetQuantityInStock() - quantity);
 
+					AmountOwedForAllSelectedProduct += (product[i].GetPrice() * quantity);
+					cout << "Amount owed for all selected product : $ " << AmountOwedForAllSelectedProduct << endl;
+
 					break;
 				}
 				else {
@@ -58,7 +53,6 @@ void ShoppingCart::AddItemToCart(Product product[], int CAPACITY, int id, int qu
 	}
 }
 
-
 void ShoppingCart::RemoveItemFromCartWithProductID(int id, int quantityToremove)
 {
 	bool productFound = false;
@@ -73,9 +67,11 @@ void ShoppingCart::RemoveItemFromCartWithProductID(int id, int quantityToremove)
 			{
 				// Decreasing quantity of product in cart/removing it
 				TotalItemsInCart -= quantityToremove;  // Subtract only the quantity being removed
+				AmountOwedForAllSelectedProduct -= products[i].GetPrice();
 
 				cout << "Product with ID " << id << " removed from cart" << endl;
 				cout << "Number of products in cart is: " << TotalItemsInCart << endl;
+				cout << "Amount owed : $ " << AmountOwedForAllSelectedProduct << endl;
 
 				// Updating stock
 				products[i].setQuantityInStock(products[i].GetQuantityInStock() - quantityToremove); // this does not work as expected
@@ -120,11 +116,11 @@ void ShoppingCart::DisplayCartItems()
 
 	for (int i = 0; i < TotalItemsInCart; i++)
 	{
-		cout << " Product N0: " << i + 1 << "  "
-			<< "Name: " << products[i].GetProductName() << "  "
-			<< "Price: " << products[i].GetPrice() << "  "
-			<< "ID: " << products[i].GetProductID() << "  "
-			<< "Number you added to cart: " << ItemCount << endl;
+		
+		cout << "Name: " << products[i].GetProductName() << endl;
+		cout << "ID: " << products[i].GetProductID() << endl;
+		cout << "Amount owed for all items: $ " << AmountOwedForAllSelectedProduct << endl;
+			
 	}
 
 	

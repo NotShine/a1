@@ -13,10 +13,6 @@ void Customer::SetCustomerEmail(string email)
     this->CustomerEmail = email;
 }
 
-void Customer::SetCustomerID(int id)
-{
-    this->CustomerID = id;
-}
 string Customer::GetCustomerName()
 {
     return CustomerName;
@@ -36,4 +32,3 @@ string Customer::GetCustomerEmail()
 {
     return CustomerEmail;
 }
-//};
