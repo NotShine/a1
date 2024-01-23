@@ -23,7 +23,7 @@ void SearchUsingRange(int range, Product product[]); // searches for products in
 
 void SearchUsingProductID(int id, Product products[]); // searches for products using id
 
-void SortByAscendingPrice(Product *product, int size); // sorts products in ascending order
+void SortByAscendingPrice(Product* product, int size); // sorts products in ascending order
 
 void PrintPriceRangeMenu(); // print the menu for selected price range, users can select options
 
@@ -51,11 +51,12 @@ int main()
 	cout << "Welcome to Treasure Traders" << endl
 		<< endl;
 
-	
+
 
 	do // code runs in a do while loop allowing for continuation
 	{
 
+		// set customer information
 		cout << "Enter your name: ";
 		getline(cin, name);
 
@@ -66,22 +67,23 @@ int main()
 		}
 	} while (!IsNameValid(name));
 
+	orderOne.SetCustomerName(name);
 	// customer email
 	cout << "Please enter your email: ";
 	cin >> email;
+	orderOne.SetCustomerEmail(email);
 
-
-	// set customer information
-	customerOne.SetCustomerName(name);
-	customerOne.SetCustomerEmail(email);
-	//customer id
-	customerOne.SetCustomerID(); // generate id
 
 	
+	
+	//customer id
+	orderOne.SetCustomerID(); // generate id
+
+
 	cout << endl;
 
-		// customer name
-		
+	// customer name
+
 	string line; // used in copying products file contents
 	ifstream file;
 	file.open("products.txt");
@@ -121,7 +123,7 @@ int main()
 	{
 
 		cout << endl
-			 << endl;
+			<< endl;
 
 		// Print general menu
 		PrintMenuOptions();
@@ -291,7 +293,7 @@ int main()
 		case 5:
 			do
 			{
-				
+
 				cout << endl << endl;
 
 				PrintShoppingCartMenu();
@@ -302,15 +304,15 @@ int main()
 				switch (choice)
 				{
 				case 1:
-					
+
 					cout << "Below are all the items in your cart" << endl
-						 << endl;
+						<< endl;
 					cart.DisplayCartItems();
 
 					break;
 
 				case 2:
-					
+
 					cart.DisplayCartItems();
 
 					int id, quantityToremove;
@@ -347,11 +349,11 @@ int main()
 					cout << "Order created for: " << orderOne.GetCustomerName() << endl;
 					cout << " Order ID: " << orderOne.GetOrderID();
 					cout << " Customer ID: " << orderOne.GetCustomerID() << endl;
-					cout << " Customer Email: " << orderOne.GetCustomerEmail() << endl<<endl;
+					cout << " Customer Email: " << orderOne.GetCustomerEmail() << endl << endl;
 
 					//print cart items
 					cart.DisplayCartItems();
-					
+
 
 					break;
 
@@ -363,10 +365,10 @@ int main()
 					cout << "Invalid choice. Please choose again." << endl;
 				}
 
-				
+
 				system("CLS");
 			} while (choice != -1);
-			
+
 
 		case 6: // exits program
 			cout << "Thank you for shopping with us." << endl;
@@ -484,7 +486,7 @@ void SearchUsingRange(int range, Product products[])
 
 void SearchUsingProductName(string name, Product products[])
 {
-	for (char &c : name)
+	for (char& c : name)
 	{
 		c = tolower(c);
 	}
@@ -511,12 +513,12 @@ void SearchUsingProductID(int id, Product products[])
 	}
 }
 
-bool compareByPrice(Product &a, Product &b)
+bool compareByPrice(Product& a, Product& b)
 {
 	return a.GetPrice() < b.GetPrice();
 }
 
-void SortByAscendingPrice(Product *product, int size)
+void SortByAscendingPrice(Product* product, int size)
 {
 
 	sort(product, product + size, compareByPrice);
@@ -561,7 +563,7 @@ void PrintShoppingCartMenu()
 {
 	cout << "\tMenu" << endl;
 	cout << "You can select the numbers associatied with the items" << endl
-		 << endl;
+		<< endl;
 	cout << " 1. View all items from cart" << endl;
 	cout << "-------------------------------" << endl;
 	cout << " 2. Remove an item from the cart" << endl;
@@ -577,4 +579,3 @@ bool IsNameValid(string name)
 	return !name.empty() && all_of(name.begin(), name.end(), [](char ch)
 		{ return isalpha(ch); });
 }
-

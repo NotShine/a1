@@ -7,7 +7,7 @@ const int MAX = 20; // maximum products is 20
 
 class Order :public Customer {
 private:
-    int orderID;
+    int orderID = 0;
     Customer customer;
     Product products[MAX];
     int ProductCount = 0;
